@@ -1,0 +1,22 @@
+{
+  "name": "automating-updates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bjeaurn/automating-updates.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bjeaurn/automating-updates/issues"
+  },
+  "homepage": "https://github.com/Bjeaurn/automating-updates#readme",
+  "devDependencies": {
+    "@angular/cli": "^9.0.0"
+  }
+}
