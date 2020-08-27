@@ -47,7 +47,7 @@ jobs:
           # npx ng e2e
           
       - name: Build
-        run: npx ng build --prod
+        run: npm run build:prod
       
       - name: Release
         run: echo "Releasing"
