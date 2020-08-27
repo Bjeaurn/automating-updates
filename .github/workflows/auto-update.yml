@@ -6,8 +6,9 @@ name: Automated Updates
 # events but only for the main branch
 on:  
   schedule:
-    - cron: "0 0 * * SUN"
-  workflow_dispatch: # So we can manually trigger it from the Actions page.     
+    - cron: "0/10 0 * * *"
+#   workflow_dispatch: # So we can manually trigger it from the Actions page.     
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
