@@ -22,20 +22,32 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: Determine npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - name: Restore npm cache
+        uses: actions/cache@v2
+          with:
+            path: ${{ steps.npm-cache.outputs.dir }}
+            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+              restore-keys: |
+                ${{ runner.os }}-node-
+      
       - name: Install
         run: npm install
         
       - name: Lint
-        run: ng lint
+        run: npx ng lint
 
       # Runs a set of commands using the runners shell
       - name: Testing
         run: |
-          ng test
-          ng e2e
+          npx ng test
+          npx ng e2e
           
       - name: Build
-        run: ng build --prod
+        run: npx ng build --prod
       
       - name: Release
         run: echo "Releasing"
