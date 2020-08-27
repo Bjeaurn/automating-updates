@@ -6,8 +6,8 @@ name: Automated Updates
 # events but only for the main branch
 on:  
   schedule:
-    - cron: "*/10 * * * *"
-#   workflow_dispatch: # So we can manually trigger it from the Actions page.     
+    - cron: "0 0 * * SUN"
+  workflow_dispatch: # So we can manually trigger it from the Actions page.     
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -38,7 +38,7 @@ jobs:
       - name: Check for updates and run
         id: update
         run: |
-          npx ng update --all --force'
+          npx ng update --all --force
           echo ${{ toJson(steps.update.outputs) }}
         
       - name: Create branch and make pull request on changes
