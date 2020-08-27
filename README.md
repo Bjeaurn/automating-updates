@@ -1,6 +1,8 @@
-# App
+![CI](https://github.com/Bjeaurn/automating-updates/workflows/CI/badge.svg)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0.
+# Automating updates
+
+Automating updates test application, with examples for different CI solutions.
 
 ## Development server
 
