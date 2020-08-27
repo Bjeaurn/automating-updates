@@ -48,6 +48,7 @@ jobs:
           
       - name: Build
         run: npm run build:prod
-      
-      - name: Release
+     
+      - name: Release if on master
         run: echo "Releasing"
+        if: github.ref == 'refs/heads/master'
