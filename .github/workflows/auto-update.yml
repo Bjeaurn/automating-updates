@@ -55,3 +55,4 @@ jobs:
         with:
           token: ${{ steps.generate-token.outputs.token }}
           branch: "ng-update-week-${{ steps.date.outputs.week }}"
+          commit-message: "chore(ng-update): Automatic updates from week ${{ steps.date.outputs.week }}"
