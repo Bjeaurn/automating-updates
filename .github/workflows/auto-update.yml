@@ -54,4 +54,4 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ steps.generate-token.outputs.token }}
-          branch: "chore(ng-update): week-${{ steps.date.outputs.week }}"
+          branch: "ng-update-week-${{ steps.date.outputs.week }}"
