@@ -48,7 +48,7 @@ jobs:
           private_key: ${{ secrets.GHA_AUTOMATION }}
       - name: Set current date/week information
         id: date
-        run: echo "::set-output name=week::$(date +%V)":  
+        run: echo "::set-output name=week::$(date +%V)"
 
       - name: Create branch and make pull request on changes
         uses: peter-evans/create-pull-request@v3
