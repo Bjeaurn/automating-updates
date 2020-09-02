@@ -46,14 +46,12 @@ jobs:
         with:
           app_id: ${{ secrets.GHA_ID }}
           private_key: ${{ secrets.GHA_AUTOMATION }}
-          
-      - name: Use token
-        env:
-          TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: |
-          echo "The generated token is masked: ${TOKEN}":  
-        
+      - name: Set current date/week information
+        id: date
+        run: echo "::set-output name=week::$(date +%V)":  
+
       - name: Create branch and make pull request on changes
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ steps.generate-token.outputs.token }}
+          branch: "chore(ng-update): week-${{ steps.date.outputs.week }}"
