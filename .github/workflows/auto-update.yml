@@ -60,6 +60,7 @@ jobs:
           title: "Automatic updates from week ${{ steps.date.outputs.week }}"
           labels: updates, angular
       - name: Slack notification SUCCESS
+        if: ${{ steps.create-pr.outputs.pull-request-number }} > 0
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: PR-bot # Optional. (defaults to webhook app)
