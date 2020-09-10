@@ -4,10 +4,10 @@ name: Automated Updates
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch
-on:  
+on:
   schedule:
     - cron: "0 0 * * SUN"
-  workflow_dispatch: # So we can manually trigger it from the Actions page.     
+  workflow_dispatch: # So we can manually trigger it from the Actions page.
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -30,17 +30,17 @@ jobs:
           path: ${{ steps.npm-cache.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-             ${{ runner.os }}-node-
-      
+            ${{ runner.os }}-node-
+
       - name: Install
         run: npm install
-      
+
       - name: Check for updates and run
         id: update
         run: |
           npx ng update --all --force
           echo ${{ toJson(steps.update.outputs) }}
-          
+
       - uses: tibdex/github-app-token@v1
         id: generate-token
         with:
@@ -58,3 +58,11 @@ jobs:
           commit-message: "chore(ng-update): Automatic updates from week ${{ steps.date.outputs.week }}"
           title: "Automatic updates from week ${{ steps.date.outputs.week }}"
           labels: updates, angular
+      - name: Slack notification
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: PR-bot # Optional. (defaults to webhook app)
+          SLACK_AVATAR: repository # Optional. can be (repository, sender, an URL) (defaults to webhook app avatar)
+        uses: Ilshidur/action-slack@2.0.2
+        with:
+          args: "An automatic update has resulted in a Pull Request" # Optional
