@@ -51,6 +51,7 @@ jobs:
         run: echo "::set-output name=week::$(date +%V)"
 
       - name: Create branch and make pull request on changes
+        id: create-pr
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ steps.generate-token.outputs.token }}
@@ -58,6 +59,9 @@ jobs:
           commit-message: "chore(ng-update): Automatic updates from week ${{ steps.date.outputs.week }}"
           title: "Automatic updates from week ${{ steps.date.outputs.week }}"
           labels: updates, angular
+      - name: Echo outputs
+        run: |
+          echo ${{ toJson(steps.create-pr.outputs) }}
       - name: Slack notification
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
